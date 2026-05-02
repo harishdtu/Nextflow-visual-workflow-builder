@@ -8,10 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "postinstall": "prisma generate"
-<<<<<<< HEAD
-=======
     
->>>>>>> a852c9a93198feb36e493eafa9501773fc569eb4
   },
   "dependencies": {
     "@clerk/nextjs": "^7.2.2",
@@ -23,10 +20,7 @@
     "@prisma/extension-accelerate": "^3.0.1",
     "@trigger.dev/sdk": "4.4.4",
     "axios": "^1.15.0",
-<<<<<<< HEAD
     "cloudinary": "^2.10.0",
-=======
->>>>>>> a852c9a93198feb36e493eafa9501773fc569eb4
     "dagre": "^0.8.5",
     "fluent-ffmpeg": "^2.1.3",
     "lucide-react": "^1.8.0",

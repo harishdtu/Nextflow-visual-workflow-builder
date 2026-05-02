@@ -25,7 +25,6 @@ textarea {
   stroke-linecap: round;
   animation: glow 1.5s ease-in-out infinite alternate;
 }
-<<<<<<< HEAD
 /* globals.css */
 .react-flow__pane {
   background: radial-gradient(circle at 1px 1px, #1f2937 1px, transparent 0);
@@ -43,9 +42,7 @@ textarea {
 .animate-flow {
   animation: flow 1s linear infinite;
 }
-=======
 
->>>>>>> a852c9a93198feb36e493eafa9501773fc569eb4
 @keyframes glow {
   from {
     filter: drop-shadow(0 0 2px #a855f7);
