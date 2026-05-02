@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
+import ffmpeg from "fluent-ffmpeg";
+import fs from "fs";
+import os from "os";
+import path from "path";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME!,
@@ -15,15 +19,12 @@ export async function POST(req: Request) {
     let timestamp = body.timestamp ?? "1";
 
     if (!videoUrl) {
-      return NextResponse.json(
-        { error: "No video URL" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "No video provided" }, { status: 400 });
     }
 
     timestamp = String(timestamp).trim();
 
-    // Convert % → seconds fallback
+    // Convert % → seconds (basic fallback)
     if (timestamp.includes("%")) {
       const percent = parseInt(timestamp.replace("%", ""));
       const duration = 5; // fallback duration
@@ -31,11 +32,11 @@ export async function POST(req: Request) {
       timestamp = String(sec);
     }
 
-    // Only support Cloudinary URLs
+    console.log("🎯 TIMESTAMP:", timestamp);
+
+    // ✅ 1. Cloudinary path (preferred)
     if (videoUrl.includes("cloudinary.com")) {
-      const match = videoUrl.match(
-        /\/upload\/(?:v\d+\/)?(.+?)(?:\.[^.]+)?$/
-      );
+      const match = videoUrl.match(/\/upload\/(?:v\d+\/)?(.+?)(?:\.[^.]+)?$/);
       const publicId = match?.[1];
 
       if (!publicId) {
@@ -58,8 +59,39 @@ export async function POST(req: Request) {
       return NextResponse.json({ output: frameUrl });
     }
 
-    throw new Error("Only Cloudinary URLs supported");
+    // ⚠️ 2. Fallback: base64 video → ffmpeg
+    if (videoUrl.startsWith("data:")) {
+      const base64 = videoUrl.split(",")[1];
+      const buffer = Buffer.from(base64, "base64");
 
+      const tmpDir = os.tmpdir();
+      const inputPath = path.join(tmpDir, `input_${Date.now()}.mp4`);
+      const outputPath = path.join(tmpDir, `frame_${Date.now()}.jpg`);
+
+      fs.writeFileSync(inputPath, buffer);
+
+      await new Promise((resolve, reject) => {
+        ffmpeg(inputPath)
+          .seekInput(parseFloat(timestamp))
+          .frames(1)
+          .output(outputPath)
+          .on("end", resolve)
+          .on("error", reject)
+          .run();
+      });
+
+      const file = fs.readFileSync(outputPath);
+
+      // cleanup
+      fs.unlinkSync(inputPath);
+      fs.unlinkSync(outputPath);
+
+      return NextResponse.json({
+        output: `data:image/jpeg;base64,${file.toString("base64")}`,
+      });
+    }
+
+    throw new Error("Unsupported video format");
   } catch (err: any) {
     console.error("FRAME ERROR:", err.message);
     return NextResponse.json(

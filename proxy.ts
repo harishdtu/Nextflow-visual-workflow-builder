@@ -10,21 +10,20 @@ const isPublicRoute = createRouteMatcher([
 export default clerkMiddleware(async (auth, req) => {
   const { userId } = await auth();
 
-  // If not logged in and trying to access protected route
+  // 🔒 Protect routes
   if (!userId && !isPublicRoute(req)) {
     const signInUrl = new URL("/sign-in", req.url);
     signInUrl.searchParams.set("redirect_url", req.url);
     return NextResponse.redirect(signInUrl);
   }
 
-  // If logged in and on root, redirect to dashboard
+  // 🔁 Redirect logged-in users from root → dashboard
   if (userId && req.nextUrl.pathname === "/") {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
-});
-import { clerkMiddleware } from "@clerk/nextjs/server";
 
-export default clerkMiddleware();
+  return NextResponse.next();
+});
 
 export const config = {
   matcher: ["/((?!_next|.*\\..*).*)"],

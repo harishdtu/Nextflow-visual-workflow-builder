@@ -33,18 +33,18 @@ export default function HistoryPanel({ onClose }: { onClose: () => void }) {
   };
 
   useEffect(() => {
-    fetchRuns();
+  fetchRuns();
 
-    const interval = setInterval(fetchRuns, 3000);
+  const interval = setInterval(fetchRuns, 3000);
 
-    const handler = () => fetchRuns();
-    window.addEventListener("historyUpdated", handler);
+  const handler = () => fetchRuns();
+  window.addEventListener("historyUpdated", handler);
 
-    return () => {
-      clearInterval(interval);
-      window.removeEventListener("historyUpdated", handler);
-    };
-  }, []);
+  return () => {
+    clearInterval(interval);
+    window.removeEventListener("historyUpdated", handler);
+  };
+}, []);
 
   const deleteRun = async (id: string, e: React.MouseEvent) => {
     e.stopPropagation();

@@ -10,19 +10,62 @@ cloudinary.config({
 });
 
 export async function POST(req: Request) {
-  const formData = await req.formData();
-  const file = formData.get("file") as File;
+  try {
+    const formData = await req.formData();
+    const file = formData.get("file") as File | null;
 
-  const buffer = Buffer.from(await file.arrayBuffer());
+    // ✅ Validate file
+    if (!file) {
+      return NextResponse.json(
+        { error: "No file uploaded" },
+        { status: 400 }
+      );
+    }
 
-  const upload = await new Promise<any>((resolve, reject) => {
-    cloudinary.uploader
-      .upload_stream({ resource_type: "image" }, (err, result) => {
-        if (err) reject(err);
-        else resolve(result);
-      })
-      .end(buffer);
-  });
+    if (!file.type.startsWith("image/")) {
+      return NextResponse.json(
+        { error: "Only image files are allowed" },
+        { status: 400 }
+      );
+    }
 
-  return NextResponse.json(upload);
+    // ✅ Limit file size (e.g. 5MB)
+    const MAX_SIZE = 5 * 1024 * 1024;
+    if (file.size > MAX_SIZE) {
+      return NextResponse.json(
+        { error: "File too large (max 5MB)" },
+        { status: 400 }
+      );
+    }
+
+    const buffer = Buffer.from(await file.arrayBuffer());
+
+    const upload = await new Promise<any>((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream(
+          {
+            resource_type: "image",
+            folder: "nextflow", // optional organization
+            quality: "auto",
+          },
+          (err, result) => {
+            if (err) return reject(err);
+            resolve(result);
+          }
+        )
+        .end(buffer);
+    });
+
+    return NextResponse.json({
+      url: upload.secure_url,
+      public_id: upload.public_id,
+    });
+  } catch (err: any) {
+    console.error("UPLOAD ERROR:", err.message);
+
+    return NextResponse.json(
+      { error: "Upload failed" },
+      { status: 500 }
+    );
+  }
 }

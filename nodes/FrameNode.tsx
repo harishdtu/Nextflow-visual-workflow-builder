@@ -1,6 +1,5 @@
 "use client";
 
-
 import { Handle, Position, useReactFlow } from "reactflow";
 import BaseNode from "@/components/BaseNode";
 
@@ -24,7 +23,7 @@ export default function FrameNode({ id, data }: any) {
       )}
 
       <div>
-        <div className="flex justify-between text-[9px] text-[#1a1212] mb-0.5">
+        <div className="flex justify-between text-[9px] text-[#555] mb-0.5">
           <span>Timestamp</span>
           <span>{data.timestamp || "1s"}</span>
         </div>
