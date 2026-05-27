@@ -7,10 +7,12 @@ A visual AI workflow builder inspired by [Krea.ai](https://krea.ai), built with 
 
 ##Screenshots 
 Dashboard
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/bc39ad1d-fc27-431c-a1ef-8c7d2567ee98" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/85c438fb-e7f5-43a8-a06f-d45d5d88e0d1" />
+
 
 History
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/875c7890-fa92-44ed-a8bc-0961f248c3c0" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1e45d059-df99-4b8d-a02b-1f687a7fa5f6" />
+
 
 ---
 
