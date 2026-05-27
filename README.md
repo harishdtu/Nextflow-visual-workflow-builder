@@ -2,7 +2,7 @@
 
 A visual AI workflow builder inspired by [Krea.ai](https://krea.ai), built with Next.js 16, React Flow, and Google Gemini API. Drag, drop, and connect nodes to build powerful AI pipelines — no code required.
 
-**[Live Demo](https://next-flow-app-git-main-harishdtus-projects.vercel.app)** · **[GitHub](https://github.com/harishdtus/NextFlow-App)**
+
 
 
 ##Screenshots
