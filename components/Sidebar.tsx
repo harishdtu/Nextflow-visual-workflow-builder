@@ -32,7 +32,7 @@ export default function Sidebar() {
       <div className="p-3 border-b border-[#222] flex items-center justify-between">
         {!collapsed && (
           <div>
-            <h1 className="text-sm font-bold">NextFlow 🚀</h1>
+            <h1 className="text-sm font-bold">NextFlow AI 🚀</h1>
             {user && (
               <p className="text-[10px] text-gray-400 truncate">
                 {user.emailAddresses[0]?.emailAddress}
