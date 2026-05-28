@@ -1,8 +1,34 @@
-# NextFlow 🚀
+# NextFlow AI
 
 A visual AI workflow builder inspired by [Krea.ai](https://krea.ai), built with Next.js 16, React Flow, and Google Gemini API. Drag, drop, and connect nodes to build powerful AI pipelines — no code required.
 
-**[Live Demo](https://next-flow-app-git-main-harishdtus-projects.vercel.app)** · **[GitHub](https://github.com/harishdtus/NextFlow-App)**
+
+
+
+##Screenshots 
+
+sample workflow
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b0b6d5a8-d24b-4e8d-bffb-3a1b43b68b00" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1b4cc48a-67ed-48f3-8e2f-15d75e95a315" />
+
+
+
+History
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1e45d059-df99-4b8d-a02b-1f687a7fa5f6" />
+
+
+failed 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6501518c-c0bb-4311-8a2e-edb5cfdf82cc" />
+
+VideoNode
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c185c59e-ef7b-4e20-aeae-987a877a18bc" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/dc2368ac-b507-48e6-b79c-feeb76a516a9" />
+
+ImageNode
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/dc3717c4-16d5-4590-be48-09ab2cff0263" />
+
+VideoNode and ImageNode
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/34ddd0ee-87ab-486b-a9b0-f9f771b06a8d" />
 
 ---
 
