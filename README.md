@@ -14,6 +14,9 @@ History
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1e45d059-df99-4b8d-a02b-1f687a7fa5f6" />
 
 
+failed 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6501518c-c0bb-4311-8a2e-edb5cfdf82cc" />
+
 ---
 
 ## ✨ Features
